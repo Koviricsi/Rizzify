@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35919.96 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rizzify", "Rizzify\Rizzify.csproj", "{A51C606F-37FC-4B07-AE5B-86E8FDA8D2D7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A51C606F-37FC-4B07-AE5B-86E8FDA8D2D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A51C606F-37FC-4B07-AE5B-86E8FDA8D2D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A51C606F-37FC-4B07-AE5B-86E8FDA8D2D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A51C606F-37FC-4B07-AE5B-86E8FDA8D2D7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {42868510-5A33-408C-9BD2-177673D69EDC}
+	EndGlobalSection
+EndGlobal
