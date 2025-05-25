@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,6 +21,9 @@ namespace Rizzify
     /// </summary>
     public partial class MainWindow : Window
     {
+        double volume = 0.5;
+        double lastvolume = 0.5;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -44,6 +48,34 @@ namespace Rizzify
             else
             {
                 WindowState = WindowState.Maximized;
+            }
+        }
+
+        private void slSound_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (slSound.Value <= 0)
+            {
+                volume = 0;
+                btMute.IsChecked = true;
+            }
+            else
+            {
+                volume = slSound.Value;
+                lastvolume = slSound.Value;
+                btMute.IsChecked = false;
+            }
+        }
+
+        private void btMute_Click(object sender, RoutedEventArgs e)
+        {
+            if (btMute.IsChecked == true)
+            {
+                volume = slSound.Value;
+                slSound.Value = 0;
+            }
+            else
+            {
+                slSound.Value = lastvolume;
             }
         }
     }

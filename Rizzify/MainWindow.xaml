@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Rizzify"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         MinHeight="600" MinWidth="400"
         Height="600" Width="400"
@@ -12,7 +13,8 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="8*"/>
-            <RowDefinition Height="92*"/>
+            <RowDefinition Height="77*"/>
+            <RowDefinition Height="15*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -20,21 +22,55 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <Rectangle Grid.ColumnSpan="3" Style="{StaticResource header_bg}" MouseDown="Rectangle_MouseDown"/>
-        
-        <Image Grid.Column="0" Source="/Images/rizzify_logo.png" HorizontalAlignment="Left"/>
+        <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource header_bg}" MouseDown="Rectangle_MouseDown"/>
+
+        <Image Grid.Row="0" Grid.Column="0" Source="/Images/rizzify_logo.png" HorizontalAlignment="Left"/>
 
         <Viewbox Stretch="Uniform" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right">
-            
+
             <Grid Width="200" Height="Auto">
 
                 <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
                     <Button x:Name="btMaxMin" Style="{StaticResource minmax_bt}" Click="btMaxMin_Click"/>
                     <Button x:Name="btClose" Style="{StaticResource close_bt}" Click="btClose_Click"/>
                 </StackPanel>
-                
+
             </Grid>
-            
+
+        </Viewbox>
+
+        <Rectangle Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource control_bg}"/>
+
+        <Viewbox Stretch="Uniform" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+
+            <Grid Width="400" Height="90">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30*"/>
+                    <RowDefinition Height="25*"/>
+                    <RowDefinition Height="45*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="80*"/>
+                    <ColumnDefinition Width="10*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Placeholder" Style="{StaticResource control_title}" Grid.Column="1"/>
+
+                <Slider Grid.Row="1" Grid.Column="1" Style="{StaticResource control_slider}"/>
+
+                <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource control_bt_loop}"/>
+                <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource control_bt_back}"/>
+                <CheckBox IsChecked="False" Grid.Row="2" Grid.Column="1" Style="{StaticResource control_cb_pp}"/>
+                <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource control_bt_next}"/>
+                <CheckBox x:Name="btMute" Grid.Row="2" Grid.Column="1" Style="{StaticResource control_bt_mute}" Click="btMute_Click"/>
+                <Slider x:Name="slSound" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource control_slider}"
+                        HorizontalAlignment="Left" Margin="255,4,0,7" Width="100" Height="30" ValueChanged="slSound_ValueChanged"
+                        Minimum="0" Maximum="1" Value="0.5"/>
+            </Grid>
+
         </Viewbox>
 
     </Grid>
