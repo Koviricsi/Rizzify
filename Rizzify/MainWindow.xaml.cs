@@ -78,5 +78,10 @@ namespace Rizzify
                 slSound.Value = lastvolume;
             }
         }
+
+        private void btFavorite_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

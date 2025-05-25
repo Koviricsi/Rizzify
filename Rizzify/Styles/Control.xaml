@@ -16,6 +16,7 @@
     </Style>
 
     <Style TargetType="CheckBox" x:Key="control_cb_pp">
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Width" Value="36"/>
         <Setter Property="Height" Value="36"/>
@@ -46,6 +47,7 @@
     </Style>
 
     <Style TargetType="Button" x:Key="control_bt_next">
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Width" Value="30"/>
         <Setter Property="Height" Value="30"/>
@@ -78,6 +80,7 @@
     </Style>
 
     <Style TargetType="Button" x:Key="control_bt_back">
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Width" Value="30"/>
         <Setter Property="Height" Value="30"/>
@@ -110,6 +113,7 @@
     </Style>
 
     <Style TargetType="Button" x:Key="control_bt_loop">
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Width" Value="30"/>
         <Setter Property="Height" Value="30"/>
@@ -134,6 +138,7 @@
     </Style>
 
     <Style TargetType="CheckBox" x:Key="control_bt_mute">
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Width" Value="30"/>
         <Setter Property="Height" Value="30"/>
@@ -161,6 +166,7 @@
     </Style>
 
     <Style TargetType="Slider" x:Key="control_slider">
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Slider">

@@ -31,6 +31,7 @@
             <Grid Width="200" Height="Auto">
 
                 <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+                    <CheckBox x:Name="btFavorite" Style="{StaticResource favorite_bt}" Click="btFavorite_Click"/>
                     <Button x:Name="btMaxMin" Style="{StaticResource minmax_bt}" Click="btMaxMin_Click"/>
                     <Button x:Name="btClose" Style="{StaticResource close_bt}" Click="btClose_Click"/>
                 </StackPanel>
@@ -38,6 +39,401 @@
             </Grid>
 
         </Viewbox>
+
+
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Row="0" Style="{StaticResource playlist_grid}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="12.5*"/>
+                    <ColumnDefinition Width="12.5*"/>
+                </Grid.ColumnDefinitions>
+
+                <Viewbox Grid.Column="0" Stretch="Uniform" Margin="10">
+                    <Path Data="M36.513,0L13.838,3.688C11.351,4.09,9.336,6.461,9.336,8.979v16.916
+c-3.674,0-6.651,2.979-6.651,6.652s2.978,6.651,6.651,6.651c3.674,0,6.652-2.979,6.652-6.651c0-0.331-0.002-0.649-0.049-0.966
+V12.544l13.923-2.566v11.546c-3.674,0-6.652,2.978-6.652,6.65c0,3.675,2.978,6.653,6.652,6.653s6.651-2.979,6.651-6.653
+c0-0.327,0-0.948,0-0.948S36.513,0,36.513,0z" Fill="{StaticResource gray4}"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="1" Stretch="Uniform" Margin="12">
+                    <TextBlock Text="Track Name" Foreground="{StaticResource white}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="2" Stretch="Uniform" Margin="12">
+                    <TextBlock Grid.Column="2" Text="00:00" Foreground="{StaticResource white}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="3" Stretch="Uniform" Margin="6">
+                    <CheckBox Grid.Column="3" IsChecked="False" Style="{StaticResource favorite_bt}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="4" Stretch="Uniform" Margin="10">
+                    <CheckBox IsChecked="False" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource control_cb_pp}" Margin="0,0,0,0"/>
+                </Viewbox>
+
+            </Grid>
+
+            <Grid Grid.Row="0" Style="{StaticResource playlist_grid}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="12.5*"/>
+                    <ColumnDefinition Width="12.5*"/>
+                </Grid.ColumnDefinitions>
+
+                <Viewbox Grid.Column="0" Stretch="Uniform" Margin="10">
+                    <Path Data="M36.513,0L13.838,3.688C11.351,4.09,9.336,6.461,9.336,8.979v16.916
+c-3.674,0-6.651,2.979-6.651,6.652s2.978,6.651,6.651,6.651c3.674,0,6.652-2.979,6.652-6.651c0-0.331-0.002-0.649-0.049-0.966
+V12.544l13.923-2.566v11.546c-3.674,0-6.652,2.978-6.652,6.65c0,3.675,2.978,6.653,6.652,6.653s6.651-2.979,6.651-6.653
+c0-0.327,0-0.948,0-0.948S36.513,0,36.513,0z" Fill="{StaticResource gray4}"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="1" Stretch="Uniform" Margin="12">
+                    <TextBlock Text="Track Name" Foreground="{StaticResource white}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="2" Stretch="Uniform" Margin="12">
+                    <TextBlock Grid.Column="2" Text="00:00" Foreground="{StaticResource white}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="3" Stretch="Uniform" Margin="6">
+                    <CheckBox Grid.Column="3" IsChecked="False" Style="{StaticResource favorite_bt}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="4" Stretch="Uniform" Margin="10">
+                    <CheckBox IsChecked="False" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource control_cb_pp}" Margin="0,0,0,0"/>
+                </Viewbox>
+
+            </Grid>
+
+            <Grid Grid.Row="1" Style="{StaticResource playlist_grid}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="12.5*"/>
+                    <ColumnDefinition Width="12.5*"/>
+                </Grid.ColumnDefinitions>
+
+                <Viewbox Grid.Column="0" Stretch="Uniform" Margin="10">
+                    <Path Data="M36.513,0L13.838,3.688C11.351,4.09,9.336,6.461,9.336,8.979v16.916
+c-3.674,0-6.651,2.979-6.651,6.652s2.978,6.651,6.651,6.651c3.674,0,6.652-2.979,6.652-6.651c0-0.331-0.002-0.649-0.049-0.966
+V12.544l13.923-2.566v11.546c-3.674,0-6.652,2.978-6.652,6.65c0,3.675,2.978,6.653,6.652,6.653s6.651-2.979,6.651-6.653
+c0-0.327,0-0.948,0-0.948S36.513,0,36.513,0z" Fill="{StaticResource gray4}"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="1" Stretch="Uniform" Margin="12">
+                    <TextBlock Text="Track Name" Foreground="{StaticResource white}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="2" Stretch="Uniform" Margin="12">
+                    <TextBlock Grid.Column="2" Text="00:00" Foreground="{StaticResource white}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="3" Stretch="Uniform" Margin="6">
+                    <CheckBox Grid.Column="3" IsChecked="False" Style="{StaticResource favorite_bt}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="4" Stretch="Uniform" Margin="10">
+                    <CheckBox IsChecked="False" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource control_cb_pp}" Margin="0,0,0,0"/>
+                </Viewbox>
+
+            </Grid>
+
+            <Grid Grid.Row="2" Style="{StaticResource playlist_grid}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="12.5*"/>
+                    <ColumnDefinition Width="12.5*"/>
+                </Grid.ColumnDefinitions>
+
+                <Viewbox Grid.Column="0" Stretch="Uniform" Margin="10">
+                    <Path Data="M36.513,0L13.838,3.688C11.351,4.09,9.336,6.461,9.336,8.979v16.916
+c-3.674,0-6.651,2.979-6.651,6.652s2.978,6.651,6.651,6.651c3.674,0,6.652-2.979,6.652-6.651c0-0.331-0.002-0.649-0.049-0.966
+V12.544l13.923-2.566v11.546c-3.674,0-6.652,2.978-6.652,6.65c0,3.675,2.978,6.653,6.652,6.653s6.651-2.979,6.651-6.653
+c0-0.327,0-0.948,0-0.948S36.513,0,36.513,0z" Fill="{StaticResource gray4}"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="1" Stretch="Uniform" Margin="12">
+                    <TextBlock Text="Track Name" Foreground="{StaticResource white}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="2" Stretch="Uniform" Margin="12">
+                    <TextBlock Grid.Column="2" Text="00:00" Foreground="{StaticResource white}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="3" Stretch="Uniform" Margin="6">
+                    <CheckBox Grid.Column="3" IsChecked="False" Style="{StaticResource favorite_bt}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="4" Stretch="Uniform" Margin="10">
+                    <CheckBox IsChecked="False" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource control_cb_pp}" Margin="0,0,0,0"/>
+                </Viewbox>
+
+            </Grid>
+
+            <Grid Grid.Row="3" Style="{StaticResource playlist_grid}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="12.5*"/>
+                    <ColumnDefinition Width="12.5*"/>
+                </Grid.ColumnDefinitions>
+
+                <Viewbox Grid.Column="0" Stretch="Uniform" Margin="10">
+                    <Path Data="M36.513,0L13.838,3.688C11.351,4.09,9.336,6.461,9.336,8.979v16.916
+c-3.674,0-6.651,2.979-6.651,6.652s2.978,6.651,6.651,6.651c3.674,0,6.652-2.979,6.652-6.651c0-0.331-0.002-0.649-0.049-0.966
+V12.544l13.923-2.566v11.546c-3.674,0-6.652,2.978-6.652,6.65c0,3.675,2.978,6.653,6.652,6.653s6.651-2.979,6.651-6.653
+c0-0.327,0-0.948,0-0.948S36.513,0,36.513,0z" Fill="{StaticResource gray4}"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="1" Stretch="Uniform" Margin="12">
+                    <TextBlock Text="Track Name" Foreground="{StaticResource white}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="2" Stretch="Uniform" Margin="12">
+                    <TextBlock Grid.Column="2" Text="00:00" Foreground="{StaticResource white}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="3" Stretch="Uniform" Margin="6">
+                    <CheckBox Grid.Column="3" IsChecked="False" Style="{StaticResource favorite_bt}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="4" Stretch="Uniform" Margin="10">
+                    <CheckBox IsChecked="False" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource control_cb_pp}" Margin="0,0,0,0"/>
+                </Viewbox>
+
+            </Grid>
+
+            <Grid Grid.Row="4" Style="{StaticResource playlist_grid}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="12.5*"/>
+                    <ColumnDefinition Width="12.5*"/>
+                </Grid.ColumnDefinitions>
+
+                <Viewbox Grid.Column="0" Stretch="Uniform" Margin="10">
+                    <Path Data="M36.513,0L13.838,3.688C11.351,4.09,9.336,6.461,9.336,8.979v16.916
+c-3.674,0-6.651,2.979-6.651,6.652s2.978,6.651,6.651,6.651c3.674,0,6.652-2.979,6.652-6.651c0-0.331-0.002-0.649-0.049-0.966
+V12.544l13.923-2.566v11.546c-3.674,0-6.652,2.978-6.652,6.65c0,3.675,2.978,6.653,6.652,6.653s6.651-2.979,6.651-6.653
+c0-0.327,0-0.948,0-0.948S36.513,0,36.513,0z" Fill="{StaticResource gray4}"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="1" Stretch="Uniform" Margin="12">
+                    <TextBlock Text="Track Name" Foreground="{StaticResource white}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="2" Stretch="Uniform" Margin="12">
+                    <TextBlock Grid.Column="2" Text="00:00" Foreground="{StaticResource white}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="3" Stretch="Uniform" Margin="6">
+                    <CheckBox Grid.Column="3" IsChecked="False" Style="{StaticResource favorite_bt}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="4" Stretch="Uniform" Margin="10">
+                    <CheckBox IsChecked="False" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource control_cb_pp}" Margin="0,0,0,0"/>
+                </Viewbox>
+
+            </Grid>
+
+            <Grid Grid.Row="5" Style="{StaticResource playlist_grid}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="12.5*"/>
+                    <ColumnDefinition Width="12.5*"/>
+                </Grid.ColumnDefinitions>
+
+                <Viewbox Grid.Column="0" Stretch="Uniform" Margin="10">
+                    <Path Data="M36.513,0L13.838,3.688C11.351,4.09,9.336,6.461,9.336,8.979v16.916
+c-3.674,0-6.651,2.979-6.651,6.652s2.978,6.651,6.651,6.651c3.674,0,6.652-2.979,6.652-6.651c0-0.331-0.002-0.649-0.049-0.966
+V12.544l13.923-2.566v11.546c-3.674,0-6.652,2.978-6.652,6.65c0,3.675,2.978,6.653,6.652,6.653s6.651-2.979,6.651-6.653
+c0-0.327,0-0.948,0-0.948S36.513,0,36.513,0z" Fill="{StaticResource gray4}"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="1" Stretch="Uniform" Margin="12">
+                    <TextBlock Text="Track Name" Foreground="{StaticResource white}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="2" Stretch="Uniform" Margin="12">
+                    <TextBlock Grid.Column="2" Text="00:00" Foreground="{StaticResource white}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="3" Stretch="Uniform" Margin="6">
+                    <CheckBox Grid.Column="3" IsChecked="False" Style="{StaticResource favorite_bt}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="4" Stretch="Uniform" Margin="10">
+                    <CheckBox IsChecked="False" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource control_cb_pp}" Margin="0,0,0,0"/>
+                </Viewbox>
+
+            </Grid>
+
+            <Grid Grid.Row="6" Style="{StaticResource playlist_grid}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="12.5*"/>
+                    <ColumnDefinition Width="12.5*"/>
+                </Grid.ColumnDefinitions>
+
+                <Viewbox Grid.Column="0" Stretch="Uniform" Margin="10">
+                    <Path Data="M36.513,0L13.838,3.688C11.351,4.09,9.336,6.461,9.336,8.979v16.916
+c-3.674,0-6.651,2.979-6.651,6.652s2.978,6.651,6.651,6.651c3.674,0,6.652-2.979,6.652-6.651c0-0.331-0.002-0.649-0.049-0.966
+V12.544l13.923-2.566v11.546c-3.674,0-6.652,2.978-6.652,6.65c0,3.675,2.978,6.653,6.652,6.653s6.651-2.979,6.651-6.653
+c0-0.327,0-0.948,0-0.948S36.513,0,36.513,0z" Fill="{StaticResource gray4}"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="1" Stretch="Uniform" Margin="12">
+                    <TextBlock Text="Track Name" Foreground="{StaticResource white}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="2" Stretch="Uniform" Margin="12">
+                    <TextBlock Grid.Column="2" Text="00:00" Foreground="{StaticResource white}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="3" Stretch="Uniform" Margin="6">
+                    <CheckBox Grid.Column="3" IsChecked="False" Style="{StaticResource favorite_bt}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="4" Stretch="Uniform" Margin="10">
+                    <CheckBox IsChecked="False" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource control_cb_pp}" Margin="0,0,0,0"/>
+                </Viewbox>
+
+            </Grid>
+
+            <Grid Grid.Row="7" Style="{StaticResource playlist_grid}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="12.5*"/>
+                    <ColumnDefinition Width="12.5*"/>
+                </Grid.ColumnDefinitions>
+
+                <Viewbox Grid.Column="0" Stretch="Uniform" Margin="10">
+                    <Path Data="M36.513,0L13.838,3.688C11.351,4.09,9.336,6.461,9.336,8.979v16.916
+c-3.674,0-6.651,2.979-6.651,6.652s2.978,6.651,6.651,6.651c3.674,0,6.652-2.979,6.652-6.651c0-0.331-0.002-0.649-0.049-0.966
+V12.544l13.923-2.566v11.546c-3.674,0-6.652,2.978-6.652,6.65c0,3.675,2.978,6.653,6.652,6.653s6.651-2.979,6.651-6.653
+c0-0.327,0-0.948,0-0.948S36.513,0,36.513,0z" Fill="{StaticResource gray4}"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="1" Stretch="Uniform" Margin="12">
+                    <TextBlock Text="Track Name" Foreground="{StaticResource white}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="2" Stretch="Uniform" Margin="12">
+                    <TextBlock Grid.Column="2" Text="00:00" Foreground="{StaticResource white}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="3" Stretch="Uniform" Margin="6">
+                    <CheckBox Grid.Column="3" IsChecked="False" Style="{StaticResource favorite_bt}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="4" Stretch="Uniform" Margin="10">
+                    <CheckBox IsChecked="False" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource control_cb_pp}" Margin="0,0,0,0"/>
+                </Viewbox>
+
+            </Grid>
+            
+            <Grid Grid.Row="8" Style="{StaticResource playlist_grid}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="12.5*"/>
+                    <ColumnDefinition Width="12.5*"/>
+                </Grid.ColumnDefinitions>
+
+                <Viewbox Grid.Column="0" Stretch="Uniform" Margin="10">
+                    <Path Data="M36.513,0L13.838,3.688C11.351,4.09,9.336,6.461,9.336,8.979v16.916
+c-3.674,0-6.651,2.979-6.651,6.652s2.978,6.651,6.651,6.651c3.674,0,6.652-2.979,6.652-6.651c0-0.331-0.002-0.649-0.049-0.966
+V12.544l13.923-2.566v11.546c-3.674,0-6.652,2.978-6.652,6.65c0,3.675,2.978,6.653,6.652,6.653s6.651-2.979,6.651-6.653
+c0-0.327,0-0.948,0-0.948S36.513,0,36.513,0z" Fill="{StaticResource gray4}"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="1" Stretch="Uniform" Margin="12">
+                    <TextBlock Text="Track Name" Foreground="{StaticResource white}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="2" Stretch="Uniform" Margin="12">
+                    <TextBlock Grid.Column="2" Text="00:00" Foreground="{StaticResource white}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="3" Stretch="Uniform" Margin="6">
+                    <CheckBox Grid.Column="3" IsChecked="False" Style="{StaticResource favorite_bt}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="4" Stretch="Uniform" Margin="10">
+                    <CheckBox IsChecked="False" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource control_cb_pp}" Margin="0,0,0,0"/>
+                </Viewbox>
+
+            </Grid>
+
+            <Grid Grid.Row="9" Style="{StaticResource playlist_grid}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="12.5*"/>
+                    <ColumnDefinition Width="12.5*"/>
+                </Grid.ColumnDefinitions>
+
+                <Viewbox Grid.Column="0" Stretch="Uniform" Margin="10">
+                    <Path Data="M36.513,0L13.838,3.688C11.351,4.09,9.336,6.461,9.336,8.979v16.916
+c-3.674,0-6.651,2.979-6.651,6.652s2.978,6.651,6.651,6.651c3.674,0,6.652-2.979,6.652-6.651c0-0.331-0.002-0.649-0.049-0.966
+V12.544l13.923-2.566v11.546c-3.674,0-6.652,2.978-6.652,6.65c0,3.675,2.978,6.653,6.652,6.653s6.651-2.979,6.651-6.653
+c0-0.327,0-0.948,0-0.948S36.513,0,36.513,0z" Fill="{StaticResource gray4}"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="1" Stretch="Uniform" Margin="12">
+                    <TextBlock Text="Track Name" Foreground="{StaticResource white}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="2" Stretch="Uniform" Margin="12">
+                    <TextBlock Grid.Column="2" Text="00:00" Foreground="{StaticResource white}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="3" Stretch="Uniform" Margin="6">
+                    <CheckBox Grid.Column="3" IsChecked="False" Style="{StaticResource favorite_bt}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="4" Stretch="Uniform" Margin="10">
+                    <CheckBox IsChecked="False" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource control_cb_pp}" Margin="0,0,0,0"/>
+                </Viewbox>
+
+            </Grid>
+
+        </Grid>
+
 
         <Rectangle Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource control_bg}"/>
 

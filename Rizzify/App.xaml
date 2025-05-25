@@ -10,6 +10,7 @@
                 <ResourceDictionary Source="Styles/Variables.xaml"/>
                 <ResourceDictionary Source="Styles/Header.xaml"/>
                 <ResourceDictionary Source="Styles/Control.xaml"/>
+                <ResourceDictionary Source="Styles/Playlist.xaml"/>
 
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
