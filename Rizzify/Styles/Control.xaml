@@ -171,9 +171,9 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Slider">
                     <Grid>
-                        <Track Name="PART_Track" IsDirectionReversed="False" Height="8">
+                        <Track x:Name="PART_Track" IsDirectionReversed="False" Height="8">
                             <Track.Thumb>
-                                <Thumb Name="PART_Thumb">
+                                <Thumb x:Name="PART_Thumb">
                                     <Thumb.Template>
                                         <ControlTemplate TargetType="Thumb">
                                             <Ellipse Width="20" Height="20" Margin="0,-8,0,-8" Fill="{StaticResource white}"/>
