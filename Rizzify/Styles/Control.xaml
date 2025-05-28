@@ -112,7 +112,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="Button" x:Key="control_bt_loop">
+    <Style TargetType="CheckBox" x:Key="control_bt_loop">
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Width" Value="30"/>
@@ -120,7 +120,7 @@
         <Setter Property="Margin" Value="0,0,162,4"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="Button">
+                <ControlTemplate TargetType="CheckBox">
                     <Canvas>
                         <Rectangle x:Name="rect" Width="30" Height="30" Fill="Transparent"/>
                         <Viewbox Width="20" Height="20" Canvas.Left="4" Canvas.Top="4">
@@ -130,6 +130,9 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="path" Property="Fill" Value="{StaticResource white}"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="path" Property="Fill" Value="{StaticResource purple}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

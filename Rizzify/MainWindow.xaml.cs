@@ -2,21 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Media;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Threading;
 
 namespace Rizzify
 {
@@ -37,8 +27,27 @@ namespace Rizzify
         public MainWindow()
         {
             InitializeComponent();
-            
+
             mediaPlayer.Volume = lastVolume;
+
+            mediaPlayer.MediaEnded += (s, e) =>
+            {
+                if (nowPlaying != -1)
+                {
+                    if (cbLoop.IsChecked == true)
+                    {
+                        mediaPlayer.Position = TimeSpan.Zero;
+                        mediaPlayer.Play();
+                    }
+                    else
+                    {
+                        mediaPlayer.Position = TimeSpan.Zero;
+                        cbPlay.IsChecked = false;
+                        lastCheckbox.IsChecked = false;
+                        mediaPlayer.Stop();
+                    }
+                }
+            };
 
             if (!Directory.Exists("Music"))
             {
@@ -55,7 +64,10 @@ namespace Rizzify
             {
                 isDragging = true;
                 cbPlay.IsChecked = false;
-                lastCheckbox.IsChecked = false;
+                if (nowPlaying != -1)
+                {
+                    lastCheckbox.IsChecked = false;
+                }
                 mediaPlayer.Pause();
             };
             track.Thumb.DragCompleted += (s, e) =>
@@ -78,6 +90,7 @@ namespace Rizzify
 
         private void LoadFiles()
         {
+
             string[] mp3Files = Directory.GetFiles("Music", "*.mp3");
             string[] wavFiles = Directory.GetFiles("Music", "*.wav");
             musicFiles.AddRange(mp3Files);
@@ -97,177 +110,180 @@ namespace Rizzify
             }
         }
 
-        private void ShowMusicFiles()
+        private void ShowMusicFiles(bool favorites = false)
         {
             int i = 0;
-            foreach (string file in musicFiles)
+            var musicList = musicFiles;
+            if (favorites)
+            {
+                musicList = favoriteFiles;
+            }
+            foreach (string file in musicList)
             {
                 string fileName = System.IO.Path.GetFileName(file).Split('.')[0];
-                string duration = "Ismeretlen";
-                MediaPlayer player = new MediaPlayer();
-                player.Open(new Uri(file, UriKind.RelativeOrAbsolute));
-                player.MediaOpened += (s, e) =>
+
+                Grid grid = new Grid();
+
+                Grid.SetRow(grid, i);
+                grid.Style = (Style)FindResource("playlist_grid");
+
+                ColumnDefinition nameCol = new ColumnDefinition();
+                nameCol.Width = new GridLength(1, GridUnitType.Star);
+
+                for (int j = 0; j < 4; j++)
                 {
-                    duration = player.NaturalDuration.TimeSpan.ToString(@"mm\:ss");
+                    ColumnDefinition col = new ColumnDefinition();
+                    col.Width = new GridLength(1, GridUnitType.Auto);
+                    grid.ColumnDefinitions.Add(col);
+                }
 
-                    Grid grid = new Grid();
+                grid.ColumnDefinitions.Insert(1, nameCol);
 
-                    Grid.SetRow(grid, i);
-                    grid.Style = (Style)FindResource("playlist_grid");
+                //Zene ikon
+                Viewbox iconVb = new Viewbox();
+                iconVb.Margin = new Thickness(6);
+                iconVb.Stretch = Stretch.Uniform;
+                Grid.SetColumn(iconVb, 0);
+                iconVb.Child = new System.Windows.Shapes.Path
+                {
+                    Data = Geometry.Parse("M36.513,0L13.838,3.688C11.351,4.09,9.336,6.461,9.336,8.979v16.916\r\nc-3.674,0-6.651,2.979-6.651,6.652s2.978,6.651,6.651,6.651c3.674,0,6.652-2.979,6.652-6.651c0-0.331-0.002-0.649-0.049-0.966\r\nV12.544l13.923-2.566v11.546c-3.674,0-6.652,2.978-6.652,6.65c0,3.675,2.978,6.653,6.652,6.653s6.651-2.979,6.651-6.653\r\nc0-0.327,0-0.948,0-0.948S36.513,0,36.513,0z"),
+                    Fill = (Brush)FindResource("gray4")
+                };
+                grid.Children.Add(iconVb);
 
-                    ColumnDefinition nameCol = new ColumnDefinition();
-                    nameCol.Width = new GridLength(1, GridUnitType.Star);
+                //Zene név
+                Viewbox nameVb = new Viewbox();
+                nameVb.Margin = new Thickness(12);
+                nameVb.Stretch = Stretch.Uniform;
+                Grid.SetColumn(nameVb, 1);
+                nameVb.Child = new TextBlock
+                {
+                    Text = fileName,
+                    Foreground = (Brush)FindResource("white"),
+                    VerticalAlignment = VerticalAlignment.Center,
+                    HorizontalAlignment = HorizontalAlignment.Center
+                };
+                grid.Children.Add(nameVb);
 
-                    for (int j = 0; j < 4; j++)
+                //Időtartam
+                Viewbox durationVb = new Viewbox();
+                durationVb.Margin = new Thickness(12);
+                durationVb.Stretch = Stretch.Uniform;
+                Grid.SetColumn(durationVb, 2);
+                TextBlock durationTb = new TextBlock
+                {
+                    Text = "00:00",
+                    Foreground = (Brush)FindResource("white"),
+                    VerticalAlignment = VerticalAlignment.Center,
+                    HorizontalAlignment = HorizontalAlignment.Center
+                };
+
+                MediaPlayer tempPlayer = new MediaPlayer();
+                tempPlayer.Open(new Uri(file, UriKind.RelativeOrAbsolute));
+                tempPlayer.MediaOpened += (s, e) =>
+                {
+                    if (tempPlayer.NaturalDuration.HasTimeSpan)
                     {
-                        ColumnDefinition col = new ColumnDefinition();
-                        col.Width = new GridLength(1, GridUnitType.Auto);
-                        grid.ColumnDefinitions.Add(col);
+                        durationTb.Text = tempPlayer.NaturalDuration.TimeSpan.ToString(@"mm\:ss");
                     }
+                };
 
-                    grid.ColumnDefinitions.Insert(1, nameCol);
+                durationVb.Child = durationTb;
+                grid.Children.Add(durationVb);
 
-                    //Zene ikon
-                    Viewbox iconVb = new Viewbox();
-                    iconVb.Margin = new Thickness(6);
-                    iconVb.Stretch = Stretch.Uniform;
-                    Grid.SetColumn(iconVb, 0);
-                    iconVb.Child = new System.Windows.Shapes.Path
+                //Favorite gomb
+                Viewbox favoriteVb = new Viewbox();
+                favoriteVb.Margin = new Thickness(6);
+                favoriteVb.Stretch = Stretch.Uniform;
+                Grid.SetColumn(favoriteVb, 3);
+                CheckBox favoriteCb = new CheckBox
+                {
+                    VerticalAlignment = VerticalAlignment.Center,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    Style = (Style)FindResource("favorite_bt"),
+                    IsChecked = favoriteFiles.Contains(file)
+                };
+
+                favoriteCb.Click += (a, b) =>
+                {
+                    if (favoriteCb.IsChecked == true)
                     {
-                        Data = Geometry.Parse("M36.513,0L13.838,3.688C11.351,4.09,9.336,6.461,9.336,8.979v16.916\r\nc-3.674,0-6.651,2.979-6.651,6.652s2.978,6.651,6.651,6.651c3.674,0,6.652-2.979,6.652-6.651c0-0.331-0.002-0.649-0.049-0.966\r\nV12.544l13.923-2.566v11.546c-3.674,0-6.652,2.978-6.652,6.65c0,3.675,2.978,6.653,6.652,6.653s6.651-2.979,6.651-6.653\r\nc0-0.327,0-0.948,0-0.948S36.513,0,36.513,0z"),
-                        Fill = (Brush)FindResource("gray4")
-                    };
-                    grid.Children.Add(iconVb);
-
-                    //Zene név
-                    Viewbox nameVb = new Viewbox();
-                    nameVb.Margin = new Thickness(12);
-                    nameVb.Stretch = Stretch.Uniform;
-                    Grid.SetColumn(nameVb, 1);
-                    nameVb.Child = new TextBlock
-                    {
-                        Text = fileName,
-                        Foreground = (Brush)FindResource("white"),
-                        VerticalAlignment = VerticalAlignment.Center,
-                        HorizontalAlignment = HorizontalAlignment.Center
-                    };
-                    grid.Children.Add(nameVb);
-
-                    //Időtartam
-                    Viewbox durationVb = new Viewbox();
-                    durationVb.Margin = new Thickness(12);
-                    durationVb.Stretch = Stretch.Uniform;
-                    Grid.SetColumn(durationVb, 2);
-                    durationVb.Child = new TextBlock
-                    {
-                        Text = duration,
-                        Foreground = (Brush)FindResource("white"),
-                        VerticalAlignment = VerticalAlignment.Center,
-                        HorizontalAlignment = HorizontalAlignment.Center
-                    };
-                    grid.Children.Add(durationVb);
-
-                    //Favorite gomb
-                    Viewbox favoriteVb = new Viewbox();
-                    favoriteVb.Margin = new Thickness(6);
-                    favoriteVb.Stretch = Stretch.Uniform;
-                    Grid.SetColumn(favoriteVb, 3);
-                    CheckBox favoriteCb = new CheckBox
-                    {
-                        VerticalAlignment = VerticalAlignment.Center,
-                        HorizontalAlignment = HorizontalAlignment.Center,
-                        Style = (Style)FindResource("favorite_bt"),
-                        IsChecked = favoriteFiles.Contains(file)
-                    };
-
-                    favoriteCb.Click += (a, b) =>
-                    {
-                        if (favoriteCb.IsChecked == true)
+                        if (!favoriteFiles.Contains(file))
                         {
-                            if (!favoriteFiles.Contains(file))
-                            {
-                                favoriteFiles.Add(file);
-                                File.WriteAllLines("favorites.txt", favoriteFiles);
-                            }
+                            favoriteFiles.Add(file);
+                            File.WriteAllLines("favorites.txt", favoriteFiles);
+                        }
+                    }
+                    else
+                    {
+                        if (favoriteFiles.Contains(file))
+                        {
+                            favoriteFiles.Remove(file);
+                            File.WriteAllLines("favorites.txt", favoriteFiles);
+                        }
+                    }
+                };
+
+                favoriteVb.Child = favoriteCb;
+                grid.Children.Add(favoriteVb);
+
+                //Lejátszás gomb
+                Viewbox playVb = new Viewbox();
+                playVb.Margin = new Thickness(6);
+                playVb.Stretch = Stretch.Uniform;
+                Grid.SetColumn(playVb, 4);
+                CheckBox playCb = new CheckBox
+                {
+                    VerticalAlignment = VerticalAlignment.Center,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    Style = (Style)FindResource("control_cb_pp"),
+                    IsChecked = false
+                };
+
+                playCb.Tag = i;
+
+                playCb.Click += (a, b) =>
+                {
+                    if (playCb.IsChecked == true)
+                    {
+                        if (nowPlaying == (int)playCb.Tag)
+                        {
+                            mediaPlayer.Play();
                         }
                         else
                         {
-                            if (favoriteFiles.Contains(file))
+                            if (nowPlaying != -1)
                             {
-                                favoriteFiles.Remove(file);
-                                File.WriteAllLines("favorites.txt", favoriteFiles);
+                                lastCheckbox.IsChecked = false;
                             }
+                            mediaPlayer.Stop();
+                            mediaPlayer.Open(new Uri(file, UriKind.RelativeOrAbsolute));
+                            mediaPlayer.MediaOpened += (c, d) =>
+                            {
+                                csuszka.Maximum = mediaPlayer.NaturalDuration.TimeSpan.TotalSeconds;
+                                csuszka.Value = 0;
+                            };
+                            mediaPlayer.Play();
+                            nowPlaying = (int)playCb.Tag;
+                            lastCheckbox = (CheckBox)a;
                         }
-                    };
-
-                    favoriteVb.Child = favoriteCb;
-                    grid.Children.Add(favoriteVb);
-
-                    //Lejátszás gomb
-                    Viewbox playVb = new Viewbox();
-                    playVb.Margin = new Thickness(6);
-                    playVb.Stretch = Stretch.Uniform;
-                    Grid.SetColumn(playVb, 4);
-                    CheckBox playCb = new CheckBox
+                        cbPlay.IsChecked = true;
+                    }
+                    else
                     {
-                        VerticalAlignment = VerticalAlignment.Center,
-                        HorizontalAlignment = HorizontalAlignment.Center,
-                        Style = (Style)FindResource("control_cb_pp"),
-                        IsChecked = false
-                    };
-
-                    playCb.Tag = i;
-
-                    playCb.Click += (a, b) =>
-                    {
-                        if (playCb.IsChecked == true)
-                        {
-                            if (nowPlaying == (int)playCb.Tag)
-                            {
-                                mediaPlayer.Play();
-                            }
-                            else
-                            {
-                                if (nowPlaying != -1)
-                                {
-                                    lastCheckbox.IsChecked = false;
-                                }
-                                mediaPlayer.Stop();
-                                mediaPlayer.Open(new Uri(file, UriKind.RelativeOrAbsolute));
-                                mediaPlayer.MediaOpened += (c, d) =>
-                                {
-                                    csuszka.Maximum = mediaPlayer.NaturalDuration.TimeSpan.TotalSeconds;
-                                    csuszka.Value = 0;
-                                };
-                                mediaPlayer.Play();
-                                nowPlaying = (int)playCb.Tag;
-                                lastCheckbox = (CheckBox)a;
-                            }
-                            cbPlay.IsChecked = true;
-                            if (history.Count > 0)
-                            {
-                                if (history.Last() != file)
-                                {
-                                    history.Add(file);
-                                }
-                            }
-                        }
-                        else 
-                        {
-                            mediaPlayer.Pause();
-                            cbPlay.IsChecked = false;
-                        }
-                        tbMusicTitle.Text = fileName; 
-                    };
-
-
-                    playVb.Child = playCb;
-                    grid.Children.Add(playVb);
-
-                    content_grid.Children.Add(grid);
-
-                    i++;
+                        mediaPlayer.Pause();
+                        cbPlay.IsChecked = false;
+                    }
+                    tbMusicTitle.Text = fileName;
                 };
+
+
+                playVb.Child = playCb;
+                grid.Children.Add(playVb);
+
+                content_grid.Children.Add(grid);
+
+                i++;
             }
         }
 
@@ -323,7 +339,16 @@ namespace Rizzify
 
         private void btFavorite_Click(object sender, RoutedEventArgs e)
         {
-
+            if (btFavorite.IsChecked == true)
+            {
+                content_grid.Children.Clear();
+                ShowMusicFiles(true);
+            }
+            else
+            {
+                content_grid.Children.Clear();
+                ShowMusicFiles();
+            }
         }
 
         private void cbPlay_Click(object sender, RoutedEventArgs e)
@@ -345,16 +370,34 @@ namespace Rizzify
 
         private void btBack_Click(object sender, RoutedEventArgs e)
         {
-            cbPlay.IsChecked = false;
-            lastCheckbox.IsChecked = false;
-            mediaPlayer.Stop();
+            if (nowPlaying != -1)
+            {
+                cbPlay.IsChecked = false;
+                lastCheckbox.IsChecked = false;
+                mediaPlayer.Stop();
+
+                int previous = (nowPlaying - 1 > -1) ? nowPlaying - 1 : nowPlaying;
+                CheckBox prevCb = content_grid.Children.OfType<Grid>().ElementAt(previous).Children.OfType<Viewbox>().Last().Child as CheckBox;
+                prevCb.IsChecked = true;
+                cbPlay.IsChecked = true;
+                prevCb.RaiseEvent(new RoutedEventArgs(CheckBox.ClickEvent));
+            }
         }
 
         private void btNext_Click(object sender, RoutedEventArgs e)
         {
-            cbPlay.IsChecked = false;
-            lastCheckbox.IsChecked = false;
-            mediaPlayer.Stop();
+            if (nowPlaying != -1)
+            {
+                cbPlay.IsChecked = false;
+                lastCheckbox.IsChecked = false;
+                mediaPlayer.Stop();
+
+                int next = (nowPlaying + 1 < content_grid.Children.Count) ? nowPlaying + 1 : nowPlaying;
+                CheckBox nextCb = content_grid.Children.OfType<Grid>().ElementAt(next).Children.OfType<Viewbox>().Last().Child as CheckBox;
+                nextCb.IsChecked = true;
+                cbPlay.IsChecked = true;
+                nextCb.RaiseEvent(new RoutedEventArgs(CheckBox.ClickEvent));
+            }
         }
     }
 }

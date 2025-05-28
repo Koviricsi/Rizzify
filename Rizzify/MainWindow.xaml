@@ -58,17 +58,6 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Row="0" Style="{StaticResource playlist_grid}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-
-            </Grid>
-
         </Grid>
 
 
@@ -94,7 +83,7 @@
 
                 <Slider x:Name="csuszka" Grid.Row="1" Grid.Column="1" Style="{StaticResource control_slider}"/>
 
-                <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource control_bt_loop}"/>
+                <CheckBox x:Name="cbLoop" Grid.Row="2" Grid.Column="1" Style="{StaticResource control_bt_loop}"/>
                 <Button x:Name="btBack" Grid.Row="2" Grid.Column="1" Style="{StaticResource control_bt_back}" Click="btBack_Click"/>
                 <CheckBox x:Name="cbPlay" IsChecked="False" Grid.Row="2" Grid.Column="1" Style="{StaticResource control_cb_pp}" Click="cbPlay_Click"/>
                 <Button x:Name="btNext" Grid.Row="2" Grid.Column="1" Style="{StaticResource control_bt_next}" Click="btNext_Click"/>
